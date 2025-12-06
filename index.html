@@ -27,7 +27,7 @@
     .container { text-align:center; z-index:10; }
 
     /* Logo */
-    .logo { width:600px; margin-bottom:40px; animation: logoAnim 2s ease-in-out infinite alternate; transition: transform 0.3s; }
+    .logo { width:250px; margin-bottom:30px; animation: logoAnim 2s ease-in-out infinite alternate; transition: transform 0.3s; }
     .logo:hover { transform: scale(1.15) rotate(5deg); }
     @keyframes logoAnim {
         0% { transform: scale(1); }
@@ -39,18 +39,19 @@
     .countdown {
         display:flex;
         justify-content:center;
+        flex-wrap: wrap;
         gap:10px;
         backdrop-filter: blur(15px);
         background: rgba(255,255,255,0.2);
-        padding:25px 40px;
+        padding:20px 25px;
         border-radius:20px;
         box-shadow: 0 12px 30px rgba(0,0,0,0.25);
         color:#333;
         font-weight:700;
-        font-size:2em;
-        letter-spacing:2px;
+        font-size:1.8em;
+        letter-spacing:1px;
     }
-    .countdown div { text-align:center; display:flex; flex-direction:column; }
+    .countdown div { text-align:center; display:flex; flex-direction:column; min-width:70px; }
     .countdown div span { font-size:2.5em; font-weight:800; animation: pulse 1s infinite alternate; }
     .colon { font-size:2.5em; font-weight:800; align-self:center; animation: pulse 1s infinite alternate; }
 
@@ -63,7 +64,7 @@
     /* Notifications */
     .notification1, .notification2 {
         position:fixed;
-        padding:15px 25px;
+        padding:12px 18px;
         border-radius:10px;
         background: rgba(255,255,255,0.25);
         color:#333;
@@ -74,18 +75,21 @@
         animation: slideIn 1s forwards 1s, fadeOut 1s forwards 10s;
         backdrop-filter: blur(5px);
         border-left:4px solid #333;
+        max-width:90%;
+        word-wrap: break-word;
     }
-    .notification1 { top:20px; right:20px; }
-    .notification2 { bottom:20px; right:20px; animation-delay:3s; }
+    .notification1 { top:15px; right:10px; }
+    .notification2 { bottom:15px; right:10px; animation-delay:3s; }
 
     @keyframes slideIn { to { opacity:1; transform: translateX(0); } }
     @keyframes fadeOut { to { opacity:0; transform: translateX(100%); } }
 
     /* Responsive */
     @media (max-width:600px){
-        .logo { width:200px; }
-        .countdown { flex-direction: column; gap:10px; font-size:1.5em; }
+        .logo { width:180px; margin-bottom:20px; }
+        .countdown { flex-direction: column; gap:8px; font-size:1.4em; padding:15px 20px; }
         .countdown div span, .colon { font-size:2em; }
+        .notification1, .notification2 { font-size:0.9em; padding:10px 15px; }
     }
 </style>
 </head>
@@ -97,13 +101,13 @@
     <img src="https://media.discordapp.net/attachments/1446236349693956199/1446947120652222577/3dgifmaker34857.gif?ex=6935d604&is=69348484&hm=0bf997ca8e66a92affa4719dd004f008e495b7e39be208d15d119283d9085548&=" alt="Logo" class="logo">
 
     <div class="countdown" id="countdown">
-        <div><span id="days">0</span>Days</div>
+        <div><span id="days">00</span>Days</div>
         <div class="colon">:</div>
-        <div><span id="hours">0</span>Hours</div>
+        <div><span id="hours">00</span>Hours</div>
         <div class="colon">:</div>
-        <div><span id="minutes">0</span>Minutes</div>
+        <div><span id="minutes">00</span>Minutes</div>
         <div class="colon">:</div>
-        <div><span id="seconds">0</span>Seconds</div>
+        <div><span id="seconds">00</span>Seconds</div>
     </div>
 </div>
 
@@ -118,9 +122,9 @@
         p.className = 'particle';
         p.style.left = Math.random()*100+'%';
         p.style.top = Math.random()*100+'%';
-        p.style.width = (Math.random()*8+2)+'px';
+        p.style.width = (Math.random()*6+2)+'px';
         p.style.height = p.style.width;
-        p.style.animationDuration = (Math.random()*10+5)+'s';
+        p.style.animationDuration = (Math.random()*12+5)+'s';
         particleContainer.appendChild(p);
     }
 
@@ -142,7 +146,7 @@
         const distance = countdownEnd - now;
 
         if(distance < 0){
-            daysEl.innerHTML = hoursEl.innerHTML = minutesEl.innerHTML = secondsEl.innerHTML = 0;
+            daysEl.innerHTML = hoursEl.innerHTML = minutesEl.innerHTML = secondsEl.innerHTML = '00';
             localStorage.removeItem(countdownEndKey);
             return;
         }
