@@ -3,82 +3,164 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Coming Soon</title>
+<title>Countdown</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 <style>
     * { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
-    body, html { width:100%; height:100%; background: linear-gradient(135deg, #ffffff, #d3d3d3); display:flex; justify-content:center; align-items:center; overflow:hidden; }
+    body, html { width:100%; height:100%; overflow:hidden; background: linear-gradient(135deg, #e0e0e0, #b0b0b0); display:flex; justify-content:center; align-items:center; position:relative; }
 
-    .container { text-align:center; color:#333; }
+    /* Particle Background */
+    .particle {
+        position:absolute;
+        width:10px;
+        height:10px;
+        background: rgba(255,255,255,0.3);
+        border-radius:50%;
+        animation: float 10s linear infinite;
+    }
+    @keyframes float {
+        0% { transform: translateY(0) translateX(0); opacity:0.3; }
+        50% { opacity:0.7; }
+        100% { transform: translateY(-1000px) translateX(50px); opacity:0.3; }
+    }
+
+    .container { text-align:center; z-index:10; }
 
     /* Logo */
-    .logo { width:120px; margin-bottom:30px; animation: logoAnim 2s ease-in-out infinite alternate; }
+    .logo { width:600px; margin-bottom:40px; animation: logoAnim 2s ease-in-out infinite alternate; transition: transform 0.3s; }
+    .logo:hover { transform: scale(1.15) rotate(5deg); }
     @keyframes logoAnim {
         0% { transform: scale(1); }
-        50% { transform: scale(1.1) rotate(5deg); }
+        50% { transform: scale(1.08) rotate(3deg); }
         100% { transform: scale(1); }
     }
 
-    /* Coming Soon Text */
-    h1 { font-size:3em; margin-bottom:20px; letter-spacing:2px; animation: fadeIn 2s ease forwards; opacity:0; }
-    @keyframes fadeIn { to { opacity:1; } }
+    /* Countdown Glass Box */
+    .countdown {
+        display:flex;
+        justify-content:center;
+        gap:10px;
+        backdrop-filter: blur(15px);
+        background: rgba(255,255,255,0.2);
+        padding:25px 40px;
+        border-radius:20px;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+        color:#333;
+        font-weight:700;
+        font-size:2em;
+        letter-spacing:2px;
+    }
+    .countdown div { text-align:center; display:flex; flex-direction:column; }
+    .countdown div span { font-size:2.5em; font-weight:800; animation: pulse 1s infinite alternate; }
+    .colon { font-size:2.5em; font-weight:800; align-self:center; animation: pulse 1s infinite alternate; }
 
-    /* Loading Animation */
-    .loader {
-        display:flex; justify-content:center; margin-top:30px;
-    }
-    .loader div {
-        width:15px; height:15px; background:#333; margin:0 5px; border-radius:50%; animation: bounce 0.6s infinite alternate;
-    }
-    .loader div:nth-child(2) { animation-delay:0.2s; }
-    .loader div:nth-child(3) { animation-delay:0.4s; }
-    @keyframes bounce {
-        0% { transform: translateY(0); }
-        100% { transform: translateY(-20px); }
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
     }
 
-    /* Notification */
-    .notification {
+    /* Notifications */
+    .notification1, .notification2 {
         position:fixed;
-        top:20px;
-        right:20px;
-        background: rgba(0,0,0,0.05);
-        border-left:4px solid #333;
         padding:15px 25px;
-        border-radius:8px;
+        border-radius:10px;
+        background: rgba(255,255,255,0.25);
         color:#333;
         font-weight:500;
-        box-shadow:0 0 15px rgba(0,0,0,0.1);
+        box-shadow: 0 0 20px rgba(0,0,0,0.2);
         opacity:0;
         transform: translateX(100%);
-        animation: slideIn 1s forwards 1s, fadeOut 1s forwards 6s;
+        animation: slideIn 1s forwards 1s, fadeOut 1s forwards 10s;
+        backdrop-filter: blur(5px);
+        border-left:4px solid #333;
     }
-    @keyframes slideIn {
-        to { opacity:1; transform: translateX(0); }
-    }
-    @keyframes fadeOut {
-        to { opacity:0; transform: translateX(100%); }
+    .notification1 { top:20px; right:20px; }
+    .notification2 { bottom:20px; right:20px; animation-delay:3s; }
+
+    @keyframes slideIn { to { opacity:1; transform: translateX(0); } }
+    @keyframes fadeOut { to { opacity:0; transform: translateX(100%); } }
+
+    /* Responsive */
+    @media (max-width:600px){
+        .logo { width:200px; }
+        .countdown { flex-direction: column; gap:10px; font-size:1.5em; }
+        .countdown div span, .colon { font-size:2em; }
     }
 </style>
 </head>
 <body>
 
+<div id="particles"></div>
+
 <div class="container">
-    <!-- Replace the src with your logo -->
-    <img src="https://media.discordapp.net/attachments/1446236349693956199/1446501806917025994/3dgifmaker83065.gif?ex=6934e009&is=69338e89&hm=eba31a425741a94f0ba16f790bf5ee77296b1eabb46322fe78e37f6418c8bad0&=" alt="Logo" class="logo">
+    <img src="https://media.discordapp.net/attachments/1446236349693956199/1446947120652222577/3dgifmaker34857.gif?ex=6935d604&is=69348484&hm=0bf997ca8e66a92affa4719dd004f008e495b7e39be208d15d119283d9085548&=" alt="Logo" class="logo">
 
-    <h1>Coming Soon</h1>
-
-    <div class="loader">
-        <div></div>
-        <div></div>
-        <div></div>
+    <div class="countdown" id="countdown">
+        <div><span id="days">0</span>Days</div>
+        <div class="colon">:</div>
+        <div><span id="hours">0</span>Hours</div>
+        <div class="colon">:</div>
+        <div><span id="minutes">0</span>Minutes</div>
+        <div class="colon">:</div>
+        <div><span id="seconds">0</span>Seconds</div>
     </div>
 </div>
 
-<div class="notification">
-    Welcome! Our website is coming soon 🚀
-</div>
+<div class="notification1">Welcome! Our website is launching soon 🚀</div>
+<div class="notification2">Thank you for your support ❤️</div>
+
+<script>
+    // Particle generation
+    const particleContainer = document.getElementById('particles');
+    for(let i=0;i<50;i++){
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = Math.random()*100+'%';
+        p.style.top = Math.random()*100+'%';
+        p.style.width = (Math.random()*8+2)+'px';
+        p.style.height = p.style.width;
+        p.style.animationDuration = (Math.random()*10+5)+'s';
+        particleContainer.appendChild(p);
+    }
+
+    // Countdown setup
+    const countdownEndKey = 'countdownEnd';
+    let countdownEnd = localStorage.getItem(countdownEndKey);
+    if(!countdownEnd){
+        countdownEnd = new Date().getTime() + 15*24*60*60*1000;
+        localStorage.setItem(countdownEndKey, countdownEnd);
+    } else countdownEnd = parseInt(countdownEnd);
+
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+
+    function updateCountdown(){
+        const now = new Date().getTime();
+        const distance = countdownEnd - now;
+
+        if(distance < 0){
+            daysEl.innerHTML = hoursEl.innerHTML = minutesEl.innerHTML = secondsEl.innerHTML = 0;
+            localStorage.removeItem(countdownEndKey);
+            return;
+        }
+
+        const days = Math.floor(distance/(1000*60*60*24));
+        const hours = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
+        const minutes = Math.floor((distance % (1000*60*60))/(1000*60));
+        const seconds = Math.floor((distance % (1000*60))/1000);
+
+        daysEl.innerHTML = days.toString().padStart(2,'0');
+        hoursEl.innerHTML = hours.toString().padStart(2,'0');
+        minutesEl.innerHTML = minutes.toString().padStart(2,'0');
+        secondsEl.innerHTML = seconds.toString().padStart(2,'0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+</script>
 
 </body>
 </html>
