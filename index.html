@@ -3,80 +3,163 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>REVE COMMING SOON </title>
+<title>REVE COMING SOON</title>
 <link rel="icon" href="https://media.discordapp.net/attachments/1446236349693956199/1446965888698810551/Untitled_Project_-_Artboard_2-removebg-preview_1.png?ex=6935e77f&is=693495ff&hm=23721c903640ab84f218457505ed08d76d077d65369d3c69365c1a75432ee437&=&format=webp&quality=lossless" type="image/png">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 <style>
-    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
-    html, body { width:100%; min-height:100%; display:flex; flex-direction:column; background: linear-gradient(135deg, #e0e0e0, #b0b0b0); }
+* { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
 
-    body { flex:1; }
+/* Body */
+html, body {
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    background: #000;
+    color:#fff;
+}
 
-    /* Main wrapper to push footer down */
-    .wrapper { flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:50px 20px; }
+/* Wrapper */
+.wrapper {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:50px 20px;
+    flex:1; /* fill available space */
+}
 
-    /* Logo */
-    .logo { width:300px; max-width:80vw; margin-bottom:30px; animation: logoAnim 2s ease-in-out infinite alternate; transition: transform 0.3s; }
-    .logo:hover { transform: scale(1.1) rotate(5deg); }
-    @keyframes logoAnim { 0% { transform: scale(1); } 50% { transform: scale(1.05) rotate(3deg); } 100% { transform: scale(1); } }
+/* Centering inner content */
+.content {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    flex:1; /* allows vertical centering inside wrapper */
+}
 
-    /* Countdown */
-    .countdown { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; backdrop-filter: blur(12px); background: rgba(255,255,255,0.25); padding:20px 30px; border-radius:15px; box-shadow: 0 8px 20px rgba(0,0,0,0.25); color:#333; font-weight:700; font-size:1.5em; letter-spacing:1px; font-family: monospace; }
-    .countdown div { text-align:center; display:flex; flex-direction:column; min-width:60px; }
-    .countdown div span { font-size:2em; font-weight:800; }
-    .colon { font-size:2em; font-weight:800; align-self:center; }
+/* Logo */
+.logo {
+    width:350px;
+    max-width:70vw;
+    margin-bottom:30px;
+    filter: drop-shadow(0 0 15px #fff);
+    animation: logoAnim 2s ease-in-out infinite alternate, glow 2s infinite alternate;
+    transition: transform 0.3s;
+}
+.logo:hover { transform: scale(1.1) rotate(3deg); }
+@keyframes logoAnim { 0% { transform: scale(1); } 50% { transform: scale(1.05) rotate(1deg); } 100% { transform: scale(1); } }
+@keyframes glow { 0% { filter: drop-shadow(0 0 10px #fff); } 50% { filter: drop-shadow(0 0 25px #fff); } 100% { filter: drop-shadow(0 0 10px #fff); } }
 
-    /* Typewriter */
-    .typewriter span { opacity:0; display:inline-block; animation: type 0.05s forwards; }
-    @keyframes type { to { opacity:1; } }
+/* Countdown */
+.countdown {
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    backdrop-filter: blur(10px);
+    background: rgba(0,0,0,0.25);
+    padding:20px 30px;
+    border-radius:15px;
+    box-shadow: 0 0 25px rgba(255,255,255,0.2);
+    color:#fff;
+    font-weight:700;
+    font-size:1.5em;
+    letter-spacing:1px;
+    font-family: monospace;
+    text-shadow: 0 0 8px #fff, 0 0 15px #fff;
+}
+.countdown div { text-align:center; display:flex; flex-direction:column; min-width:55px; }
+.countdown div span { font-size:2em; font-weight:800; }
+.colon { font-size:2em; font-weight:800; align-self:center; }
 
-    /* Footer */
-    footer { width:100%; padding:15px 10px; text-align:center; background: rgba(50,50,50,0.9); color:white; font-size:0.9em; font-weight:500; }
-    footer span { display:block; font-size:0.8em; margin-top:5px; color:#ccc; }
+/* Footer */
+footer {
+    width:100%;
+    padding:15px 10px;
+    text-align:center;
+    background: rgba(0,0,0,0.85);
+    color:white;
+    font-size:0.9em;
+    font-weight:500;
+    text-shadow:0 0 4px #fff;
+    margin-top:auto; /* STICKS TO BOTTOM */
+}
 
-    /* Notifications */
-    .notification1{ position:fixed; padding:10px 15px; border-radius:10px; background: rgba(255,255,255,0.25); color:#333; font-weight:500; box-shadow: 0 0 15px rgba(0,0,0,0.2); opacity:0; transform: translateX(100%); animation: slideIn 1s forwards 1s, fadeOut 1s forwards 10s; backdrop-filter: blur(5px); border-left:4px solid #333; max-width:90%; word-wrap: break-word; }
-    .notification1 { top:10px; right:10px; }
+/* Snowflake */
+.snowflake {
+    position: fixed;
+    top: -10px;
+    color: #fff;
+    font-size: 8px;
+    user-select: none;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.8;
+    text-shadow: 0 0 6px #fff;
+    animation: fall linear infinite;
+}
+@keyframes fall {
+    0% { transform: translateY(-10px); opacity:0; }
+    10% { opacity:1; }
+    100% { transform: translateY(110vh); opacity:0; }
+}
 
+/* Notification */
+.notification1{
+    position:fixed;
+    padding:10px 15px;
+    border-radius:10px;
+    background: rgba(255,255,255,0.15);
+    color:#fff;
+    font-weight:500;
+    box-shadow:0 0 10px rgba(255,255,255,0.2);
+    opacity:0;
+    transform: translateX(100%);
+    animation: slideIn 1s forwards 1s, fadeOut 1s forwards 10s;
+    backdrop-filter: blur(5px);
+    border-left:4px solid #fff;
+    max-width:90%;
+    word-wrap: break-word;
+}
+.notification1 { top:10px; right:10px; }
+@keyframes slideIn { to { opacity:1; transform: translateX(0); } }
+@keyframes fadeOut { to { opacity:0; transform: translateX(100%); } }
 
-    @keyframes slideIn { to { opacity:1; transform: translateX(0); } }
-    @keyframes fadeOut { to { opacity:0; transform: translateX(100%); } }
-
-    /* Responsive */
-    @media (max-width:768px){
-        .logo { width:150px; margin-bottom:20px; }
-        .countdown { font-size:1.2em; padding:15px 20px; gap:5px; }
-        .countdown div span, .colon { font-size:1.5em; }
-        footer { font-size:0.85em; padding:10px 5px; }
-        .notification1 { font-size:0.8em; padding:8px 12px; }
-    }
-
-    @media (max-width:480px){
-        .logo { width:120px; margin-bottom:15px; }
-        .countdown { font-size:1em; padding:12px 15px; gap:3px; }
-        .countdown div span, .colon { font-size:1.2em; }
-        footer { font-size:0.8em; padding:8px 5px; }
-    }
+/* Responsive */
+@media (max-width:768px){
+    .logo { width:150px; margin-bottom:20px; }
+    .countdown { font-size:1.2em; padding:15px 20px; gap:5px; }
+    .countdown div span, .colon { font-size:1.5em; }
+    footer { font-size:0.85em; padding:10px 5px; }
+    .notification1 { font-size:0.8em; padding:8px 12px; }
+}
+@media (max-width:480px){
+    .logo { width:120px; margin-bottom:15px; }
+    .countdown { font-size:1em; padding:12px 15px; gap:3px; }
+    .countdown div span, .colon { font-size:1.2em; }
+    footer { font-size:0.8em; padding:8px 5px; }
+}
 </style>
 </head>
 <body>
 
 <div class="wrapper">
-    <img src="https://media.discordapp.net/attachments/1446236349693956199/1446947120652222577/3dgifmaker34857.gif?ex=6935d604&is=69348484&hm=0bf997ca8e66a92affa4719dd004f008e495b7e39be208d15d119283d9085548&=" alt="Logo" class="logo">
+    <div class="content">
+        <img src="https://media.discordapp.net/attachments/1446236349693956199/1446947120652222577/3dgifmaker34857.gif?ex=6935d604&is=69348484&hm=0bf997ca8e66a92affa4719dd004f008e495b7e39be208d15d119283d9085548&=" alt="Logo" class="logo">
 
-    <div class="countdown" id="countdown">
-        <div><span id="days">00</span>Days</div>
-        <div class="colon">:</div>
-        <div><span id="hours">00</span>Hours</div>
-        <div class="colon">:</div>
-        <div><span id="minutes">00</span>Minutes</div>
-        <div class="colon">:</div>
-        <div><span id="seconds">00</span>Seconds</div>
+        <div class="countdown" id="countdown">
+            <div><span id="days">00</span>Days</div>
+            <div class="colon">:</div>
+            <div><span id="hours">00</span>Hours</div>
+            <div class="colon">:</div>
+            <div><span id="minutes">00</span>Minutes</div>
+            <div class="colon">:</div>
+            <div><span id="seconds">00</span>Seconds</div>
+        </div>
     </div>
 </div>
 
 <div class="notification1">Welcome! Our website is launching soon 🚀</div>
-
 
 <footer>
     Revestudios © All Rights Reserved<br>
@@ -84,55 +167,66 @@
 </footer>
 
 <script>
-    const countdownEndKey = 'countdownEnd';
-    let countdownEnd = localStorage.getItem(countdownEndKey);
-    if(!countdownEnd){
-        countdownEnd = new Date().getTime() + 15*24*60*60*1000;
-        localStorage.setItem(countdownEndKey, countdownEnd);
-    } else countdownEnd = parseInt(countdownEnd);
+const countdownEndKey = 'countdownEnd';
+let countdownEnd = localStorage.getItem(countdownEndKey);
+if(!countdownEnd){
+    countdownEnd = new Date().getTime() + 15*24*60*60*1000;
+    localStorage.setItem(countdownEndKey, countdownEnd);
+} else countdownEnd = parseInt(countdownEnd);
 
-    const daysEl = document.getElementById('days');
-    const hoursEl = document.getElementById('hours');
-    const minutesEl = document.getElementById('minutes');
-    const secondsEl = document.getElementById('seconds');
+const daysEl = document.getElementById('days');
+const hoursEl = document.getElementById('hours');
+const minutesEl = document.getElementById('minutes');
+const secondsEl = document.getElementById('seconds');
 
-    function typewriter(element, text){
-        element.innerHTML = "";
-        for(let i=0;i<text.length;i++){
-            let span = document.createElement("span");
-            span.innerText = text[i];
-            span.style.animationDelay = (i*0.05)+"s";
-            element.appendChild(span);
-        }
+function typewriter(element, text){
+    element.innerHTML = "";
+    for(let i=0;i<text.length;i++){
+        let span = document.createElement("span");
+        span.innerText = text[i];
+        span.style.animationDelay = (i*0.05)+"s";
+        element.appendChild(span);
+    }
+}
+
+function updateCountdown(){
+    const now = new Date().getTime();
+    const distance = countdownEnd - now;
+
+    if(distance < 0){
+        typewriter(daysEl,'00');
+        typewriter(hoursEl,'00');
+        typewriter(minutesEl,'00');
+        typewriter(secondsEl,'00');
+        localStorage.removeItem(countdownEndKey);
+        return;
     }
 
-    function updateCountdown(){
-        const now = new Date().getTime();
-        const distance = countdownEnd - now;
+    const days = Math.floor(distance/(1000*60*60*24));
+    const hours = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
+    const minutes = Math.floor((distance % (1000*60*60))/(1000*60));
+    const seconds = Math.floor((distance % (1000*60))/1000);
 
-        if(distance < 0){
-            typewriter(daysEl,'00');
-            typewriter(hoursEl,'00');
-            typewriter(minutesEl,'00');
-            typewriter(secondsEl,'00');
-            localStorage.removeItem(countdownEndKey);
-            return;
-        }
+    typewriter(daysEl,days.toString().padStart(2,'0'));
+    typewriter(hoursEl,hours.toString().padStart(2,'0'));
+    typewriter(minutesEl,minutes.toString().padStart(2,'0'));
+    typewriter(secondsEl,seconds.toString().padStart(2,'0'));
+}
 
-        const days = Math.floor(distance/(1000*60*60*24));
-        const hours = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
-        const minutes = Math.floor((distance % (1000*60*60))/(1000*60));
-        const seconds = Math.floor((distance % (1000*60))/1000);
+updateCountdown();
+setInterval(updateCountdown, 1000);
 
-        typewriter(daysEl,days.toString().padStart(2,'0'));
-        typewriter(hoursEl,hours.toString().padStart(2,'0'));
-        typewriter(minutesEl,minutes.toString().padStart(2,'0'));
-        typewriter(secondsEl,seconds.toString().padStart(2,'0'));
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+// Snow generation
+const snowCount = 60;
+for(let i=0;i<snowCount;i++){
+    const snow = document.createElement('div');
+    snow.className = 'snowflake';
+    snow.style.left = Math.random() * 100 + 'vw';
+    snow.style.animationDuration = (5 + Math.random()*10) + 's';
+    snow.style.fontSize = (6 + Math.random()*14) + 'px';
+    snow.innerHTML = '❄';
+    document.body.appendChild(snow);
+}
 </script>
-
 </body>
 </html>
